@@ -39,5 +39,5 @@ steps:
   inputs:
     azureSubscription: 'Resource Manager - Ng Get Started'
     appName: 'nggetstarted'
-    package: $(System.DefaultWorkingDirectory)/**.zip
+    package: $(System.DefaultWorkingDirectory)/*/**.zip
     customWebConfig: '-Handler iisnode -NodeStartFile server.js -appType node'
