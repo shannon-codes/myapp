@@ -34,3 +34,10 @@ steps:
   inputs:
     rootFolderOrFile: 'dist'
     includeRootFolder: false
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Resource Manager - Ng Get Started'
+    appName: '$(WebAppName)'
+    package: $(System.DefaultWorkingDirectory)/**/*.zip
+    customWebConfig: '-Handler iisnode -NodeStartFile server.js -appType node'
