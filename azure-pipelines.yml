@@ -9,9 +9,6 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  System.DefaultWorkingDirectory: 'dist'
-
 steps:
 - task: NodeTool@0
   inputs:
@@ -26,4 +23,4 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)'
+    PathtoPublish: 'dist'
