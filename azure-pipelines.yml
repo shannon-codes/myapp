@@ -33,9 +33,11 @@ steps:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip'
     artifactName: 'drop'
 
-- task: AzureWebApp@1
+- task: AzureRmWebAppDeployment@4
   inputs:
-    azureSubscription: 'Resource Manager - Ng Get Started'
-    appName: 'nggetstarted'
-    package: $(System.DefaultWorkingDirectory)/dist
-    customWebConfig: '-Handler iisnode -NodeStartFile server.js -appType node'
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Visual Studio Enterprise Subscription(75bc7863-c8af-4dc3-b75a-8a1c1b0f72c0)'
+    appType: 'webAppLinux'
+    WebAppName: 'nggetstarted'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/dist'
+    RuntimeStack: 'NODE|10.12'
