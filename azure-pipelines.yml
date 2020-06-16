@@ -21,23 +21,21 @@ steps:
     ng build --prod
   displayName: 'npm install and build'
 
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)'
-    Contents: |
-      dist/**
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-- task: PublishBuildArtifacts@1
-
 - task: ArchiveFiles@2
+  displayName: "Archive files"
   inputs:
     rootFolderOrFile: 'dist'
     includeRootFolder: false
+    archiveFile: "$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip"
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip'
+    artifactName: 'drop'
 
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'Resource Manager - Ng Get Started'
     appName: 'nggetstarted'
-    package: $(System.DefaultWorkingDirectory)/*/**.zip
+    package: $(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip
     customWebConfig: '-Handler iisnode -NodeStartFile server.js -appType node'
