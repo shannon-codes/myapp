@@ -33,11 +33,10 @@ steps:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip'
     artifactName: 'drop'
 
-- task: AzureRmWebAppDeployment@4
+- task: AzureWebApp@1
   inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Visual Studio Enterprise Subscription(75bc7863-c8af-4dc3-b75a-8a1c1b0f72c0)'
-    appType: 'webAppLinux'
-    WebAppName: 'nggetstarted'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/dist'
-    RuntimeStack: 'NODE|10.12'
+    azureSubscription: 'Resource Manager - Ng Get Started - Shop'
+    appType: 'webApp'
+    appName: 'nggetstarted'
+    package: '$(System.DefaultWorkingDirectory)/dist'
+    deploymentMethod: 'auto'
